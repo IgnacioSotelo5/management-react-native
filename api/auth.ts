@@ -78,11 +78,10 @@ export class AuthAPI{
                 }
             })
 
-            if(res.data){
+            return res.data.success
 
-            }
-        } catch (error) {
-            
+        } catch{
+            return false
         }
     }
 

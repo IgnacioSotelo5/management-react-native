@@ -16,7 +16,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [appIsReady, setAppIsReady] = useState(false)
-  const {session, isLoading} = useSession()
+  const {session} = useSession()  
   
   useEffect(() => {
     async function prepare(){
@@ -46,10 +46,10 @@ export default function RootLayout() {
   }, [])
 
   const onLayoutRootView = useCallback(() => {
-    if(appIsReady && !isLoading){
+    if(appIsReady){
       SplashScreen.hide()
     }
-  }, [appIsReady, isLoading])
+  }, [appIsReady])
 
   if(!appIsReady){
     return null
@@ -64,7 +64,7 @@ export default function RootLayout() {
             <PaperProvider>
               <Stack screenOptions={{headerShown: false}}>
               {
-                session ? (
+                session !== null ? (
                   <Stack.Screen name='(app)' />
                 ) : (
                   <Stack.Screen name='(auth)' />

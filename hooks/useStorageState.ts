@@ -50,7 +50,7 @@ export function useStorageState(key: string): UseStateHook<string> {
         }
       } else {
         value = await SecureStore.getItemAsync(key);
-      }
+      }      
 
       setState(value);
     }
