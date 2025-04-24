@@ -1,6 +1,0 @@
-Overhaul authentication system and app structure
-
-Started as a fix for incorrect auth behaviors but evolved into a larger refactor. Moved from app/(app)/(tabs) to app/(tabs), implemented proper token validation with isSessionValidated state, and added robust error handling via ApiError class. Enhanced UI with loading states and error messages. Improved navigation flow and updated dependencies to latest versions.
-
-The system is now more maintainable with better error handling and user feedback.
-
