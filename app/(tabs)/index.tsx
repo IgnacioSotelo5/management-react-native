@@ -4,24 +4,25 @@ import { ThemedText } from "@/components/text/ThemedText";
 import { ThemedView } from "@/components/view/ThemedView";
 import { useTheme } from "@/hooks/useTheme";
 import { recipes } from "@/mocks/recipes";
-import { Link } from "expo-router";
-import { useState } from "react";
+import { Link, Redirect, router } from "expo-router";
+import { useEffect, useState } from "react";
 import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import { Chip, Divider, Searchbar } from "react-native-paper";
+import { useSession } from "@/hooks/useAuth";
 
 const CARDS: LinkedCardProps[] = [
     {
         title: 'Inventario',
         content: 'Administra tu inventario y mantén tu materia prima actualizada',
         bgColor: '#ea580c',
-        href: '/(app)/(tabs)/inventary'
+        href: '/(tabs)/inventary'
 
     },
     {
         title: 'Recetas',
         content: 'Actualiza tus recetas automáticamente para mantener tus precios al día',
         bgColor: '#d97706',
-        href: '/(app)/(tabs)/recipes'
+        href: '/(tabs)/recipes'
 
         
     },
@@ -29,7 +30,7 @@ const CARDS: LinkedCardProps[] = [
         title: 'Pedidos',
         content: 'Registra tus pedidos, haz su seguimiento y recibe notificaciones sobre su estado',
         bgColor: '#fb923c',
-        href: '/(app)/(tabs)/orders'
+        href: '/(tabs)/orders'
 
     }
 ]
@@ -88,7 +89,7 @@ export default function HomeScreen(){
                     <ThemedText className="font-bold font-quicksand text-2xl pl-4">
                         Buscar por categoría
                     </ThemedText>
-                    <Link href={'/(app)/(tabs)/recipes'} asChild>
+                    <Link href={'/(tabs)/recipes'} asChild>
                         <Pressable className="pr-4">
                             <ThemedText className="opacity-80"> Ver todo</ThemedText>
                         </Pressable>

@@ -1,10 +1,11 @@
 import { ThemedText } from "@/components/text/ThemedText"
 import { ThemedView } from "@/components/view/ThemedView"
+import { useApiError } from "@/hooks/useApiError"
 import { useSession } from "@/hooks/useAuth"
 import { useTheme } from "@/hooks/useTheme"
-import { Stack, Link } from "expo-router"
+import { Stack, Link, router } from "expo-router"
 import { useState } from "react"
-import { ActivityIndicator } from "react-native"
+import { ActivityIndicator, Text } from "react-native"
 import { View, Pressable, TextInput } from "react-native"
 
 export default function LoginScreen(){
@@ -12,12 +13,16 @@ export default function LoginScreen(){
     const theme = colorScheme[currentColorScheme]
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState<string | null>(null)
     const { signIn, isLoading } = useSession()
+    const {handleError} = useApiError()
 
     const onLogin = async () => {
         try {
             await signIn({email, password})
         } catch (error: any) {
+            const message = handleError(error, "Error al iniciar sesión", "auth")         
+            setError(message)
             throw new Error('Error al iniciar sesión. ' + error.message)
         }
     }
@@ -60,19 +65,24 @@ export default function LoginScreen(){
                         onChangeText={setPassword}
                         secureTextEntry
                         />
-                    <Pressable 
-                    onPress={onLogin}
-                    className="flex justify-center items-center rounded-full py-3 px-6 dark:bg-slate-500">
-                        <ThemedText className="text-xl font-semibold">
+                        <Text className="text-red-500 text-sm">
                             {
-                                isLoading ? (
-                                    <ActivityIndicator />
-                                ) : (
-                                    'Iniciar sesión'
-                                )
+                                error && error.length > 0 ? error : null
                             }
-                        </ThemedText>
-                    </Pressable>
+                        </Text>
+                        <Pressable 
+                        onPress={onLogin}
+                        className="flex justify-center items-center rounded-full py-3 px-6 dark:bg-slate-500">
+                            <ThemedText className="text-xl font-semibold">
+                                {
+                                    isLoading ? (
+                                        <ActivityIndicator size={26} color={"#f01"} style={{width: 10}}  />
+                                    ) : (
+                                        'Iniciar sesión'
+                                    )
+                                }
+                            </ThemedText>
+                        </Pressable>
                     </View>
 
                 </View>

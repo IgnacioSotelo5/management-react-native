@@ -6,7 +6,7 @@ import { Recipe } from "@/mocks/recipes";
 export function RecipeCard({recipe}:{ recipe: Pick<Recipe, 'id' | 'name'>}){
     return(
         <Link href={{
-            pathname: '/(app)/[id]',
+            pathname: '/(tabs)/recipes/[id]',
             params: {id: recipe.id}
         }}>
             <Card>
