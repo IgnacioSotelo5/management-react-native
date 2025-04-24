@@ -1,11 +1,12 @@
-import { AuthAPI } from "@/api/auth"
 import { ThemedText } from "@/components/text/ThemedText"
 import { ThemedView } from "@/components/view/ThemedView"
+import { AUTH_ERRORS } from "@/constants/auth.constants"
+import { useApiError } from "@/hooks/useApiError"
 import { useSession } from "@/hooks/useAuth"
 import { useTheme } from "@/hooks/useTheme"
 import { Stack, Link } from "expo-router"
 import { useState } from "react"
-import { View, TextInput, Pressable, ActivityIndicator } from "react-native"
+import { View, TextInput, Pressable, ActivityIndicator, Text } from "react-native"
 
 export default function RegisterScreen(){
     const {colorScheme, currentColorScheme} = useTheme()
@@ -14,15 +15,16 @@ export default function RegisterScreen(){
     const [name, setName] = useState('')
     const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
-    const [errorMessage, setErrorMessage] = useState('Error al registrar el usuario')
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const {signUp, isLoading} = useSession()
+    const {handleError} = useApiError()
 
     const handleSignup = async () => {
         try {
-           await AuthAPI.signup({name, lastName, email, password});
+           await signUp({name, lastName, email, password});
         } catch (error: any) {
-            console.error(error)
-            setErrorMessage('Error al registrar el usuario.')
+            const message = handleError(error, AUTH_ERRORS.SIGNUP_ERROR, "auth")
+            setErrorMessage(message)
         } 
     }
 
@@ -78,6 +80,11 @@ export default function RegisterScreen(){
                         onChangeText={setPassword}
                         secureTextEntry
                         />
+                        {
+                            errorMessage && errorMessage.length > 0 ? 
+                            <Text className="text-sm text-red-500">{errorMessage}</Text> :
+                            null
+                        }
                         <Pressable 
                         onPress={handleSignup}
                         className="flex justify-center items-center rounded-full mt-4 py-3 px-6 dark:bg-slate-500">

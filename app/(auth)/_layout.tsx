@@ -1,10 +1,25 @@
-import { Stack } from "expo-router";
+import { useSession } from "@/hooks/useAuth";
+import { Redirect, Slot, Stack } from "expo-router";
+import { ActivityIndicator } from "react-native-paper";
 
-export default function AuthLayout(){    
+export default function AuthLayout(){   
+    const {session, isAuthLoading} = useSession() 
+
+    if(isAuthLoading) {
+        return <ActivityIndicator animating={true} size={"large"} className="flex-1" />
+    }
+
+    
+
     return (
-        <Stack>
-            <Stack.Screen name="login" options={{title: 'Iniciar sesión'}} />
-            <Stack.Screen name="signup" options={{title: 'Registrarse'}} />
-        </Stack>
+        <>
+            {
+                session ? (
+                    <Redirect href={'/(tabs)'} />
+                ) : (
+                    <Stack />
+                )
+            }
+        </>
     )
 }

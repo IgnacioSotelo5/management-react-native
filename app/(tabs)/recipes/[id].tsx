@@ -8,7 +8,7 @@ import { ThemedText } from '@/components/text/ThemedText';
 import { ThemedButton } from '@/components/button/ThemedButton';
 import { LeftArrowIcon } from '@/components/icons';
 
-export default function RecipeScreen() {
+export default function RecipeDetail() {
     const { id } = useLocalSearchParams<{ id: string }>();
     const recipeIndex = recipes.findIndex(recipe => recipe.id === Number(id))
     const recipe = recipes[recipeIndex]
