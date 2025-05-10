@@ -1,7 +1,8 @@
-import axios, { AxiosResponse } from "axios"
+import axios from "axios"
 import { BASE_URL } from "@/constants/config"
+import { ApiError } from "./errors/ApiError"
 
-type User = {
+export type User = {
     id: string
     name: string
     lastName: string
@@ -11,23 +12,20 @@ type User = {
     updatedAt: Date
 }
 
-interface SignupResponse{
-    token?: string
-    message?: string
-    error?: string
-    user?: User
-   
-}
-
-interface Response extends AxiosResponse<SignupResponse>{
-    data: SignupResponse
+export interface AuthResponse {
+    success: boolean;
+    data: {
+        token: string;
+        user: User;
+        message?: string;
+    }
 }
 
 export class AuthAPI{
 
-    static async signup({name, lastName, email, password}: {name: string, lastName: string, email: string, password: string}): Promise<Response> {
+    static async signup({name, lastName, email, password}: {name: string, lastName: string, email: string, password: string}): Promise<AuthResponse> {
         try {            
-            const response: Response = await axios.post<SignupResponse>(`${BASE_URL}/auth/signup`, {
+            const response = await axios.post(`${BASE_URL}/auth/signup`, {
                 name, 
                 lastName,
                 email,
@@ -40,14 +38,13 @@ export class AuthAPI{
                 }
             })
 
-            return response
+            return response.data
         } catch (error: any) {
-            console.error(error)
-            throw new Error(error.message || 'No se pudo completar el registro.')
+            throw new ApiError(error.response.data.message, error.response.status)
         }
     }
 
-    static async login({email, password}: {email:string, password: string}): Promise<any> {
+    static async login({email, password}: {email:string, password: string}): Promise<AuthResponse> {
         try {
             const response = await axios.post(`${BASE_URL}/auth/login`, {
                 email,
@@ -57,20 +54,16 @@ export class AuthAPI{
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 }
-            })
+            })            
 
-            if(response.status >= 300){
-                throw new Error('No se pudo iniciar sesión.')
-            } else{
-                return response.data
-            }
-        } catch (error: any) {
-            throw new Error(error.message || 'Error al intentar iniciar sesión.')
+            return response.data
+        } catch (error: any) {            
+            throw new ApiError(error.response.data.message, error.response.status)
         }
 
     }
 
-    static async validateToken(token: string){
+    static async validateToken(token: string): Promise<boolean> {
         try {
             const res = await axios.get(`${BASE_URL}/auth/validate`, {
                 headers: {
@@ -78,11 +71,10 @@ export class AuthAPI{
                 }
             })
 
-            if(res.data){
+            return res.data.success
 
-            }
-        } catch (error) {
-            
+        } catch{
+            return false
         }
     }
 
