@@ -91,13 +91,13 @@ export function IngredientsTable({ ingredients }: { ingredients: Ingredient[] })
               >
                 {selectedIngredient && (
                   <>
-                    <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                    <ThemedText style={{ fontSize: 18, fontWeight: "bold" }}>
                       {selectedIngredient.name}
-                    </Text>
-                    <Text>Unidad: {selectedIngredient.unit}</Text>
-                    <Text>Cantidad: {selectedIngredient.stockQuantity}</Text>
-                    <Text>Precio unitario: {selectedIngredient.pricePerUnit}</Text>
-                    <Text>Precio total: {selectedIngredient.totalUnit}</Text>
+                    </ThemedText>
+                    <ThemedText>Unidad: {selectedIngredient.unit}</ThemedText>
+                    <ThemedText>Cantidad: {selectedIngredient.stockQuantity}</ThemedText>
+                    <ThemedText>Precio unitario: {selectedIngredient.pricePerUnit}</ThemedText>
+                    <ThemedText>Precio total: {selectedIngredient.totalUnit}</ThemedText>
 
                     <TouchableOpacity
                       onPress={() => setModalVisible(false)}
@@ -108,7 +108,7 @@ export function IngredientsTable({ ingredients }: { ingredients: Ingredient[] })
                         borderRadius: 5,
                       }}
                     >
-                      <Text style={{ color: "white" }}>Cerrar</Text>
+                      <ThemedText style={{ color: "white" }}>Cerrar</ThemedText>
                     </TouchableOpacity>
                   </>
                 )}

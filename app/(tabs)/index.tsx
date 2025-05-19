@@ -11,29 +11,35 @@ import { Chip, Divider, Searchbar } from "react-native-paper";
 import { useSession } from "@/hooks/useAuth";
 
 const CARDS: LinkedCardProps[] = [
-    {
-        title: 'Inventario',
-        content: 'Administra tu inventario y mantén tu materia prima actualizada',
-        bgColor: '#ea580c',
-        href: '/(tabs)/inventary'
-
+  {
+    title: 'Inventario',
+    content: 'Administra tu inventario y mantén tu materia prima actualizada',
+    bgColor: {
+      dark: '#ea580c',
+      light: '#FFDEC999'
     },
-    {
-        title: 'Recetas',
-        content: 'Actualiza tus recetas automáticamente para mantener tus precios al día',
-        bgColor: '#d97706',
-        href: '/(tabs)/recipes'
-
-        
+    href: '/(tabs)/inventary'
+  },
+  {
+    title: 'Recetas',
+    content: 'Actualiza tus recetas automáticamente para mantener tus precios al día',
+    bgColor: {
+      dark: '#d97706',
+      light: '#FFF2CC99'
     },
-    {
-        title: 'Pedidos',
-        content: 'Registra tus pedidos, haz su seguimiento y recibe notificaciones sobre su estado',
-        bgColor: '#fb923c',
-        href: '/(tabs)/orders'
+    href: '/(tabs)/recipes'
+  },
+  {
+    title: 'Pedidos',
+    content: 'Registra tus pedidos, haz seguimiento y recibe notificaciones sobre su estado',
+    bgColor: {
+      dark: '#fb923c',
+      light: '#FDEED999'
+    },
+    href: '/(tabs)/orders'
+  }
+];
 
-    }
-]
 
 const CATEGORIES = [
     {
@@ -58,7 +64,8 @@ const CATEGORIES = [
 
 export default function HomeScreen(){
     const [searchQuery, setSearchQuery] = useState('')
-    const { currentColorScheme, colors } = useTheme()
+    const { colorScheme, currentColorScheme } = useTheme()
+    const theme = colorScheme[currentColorScheme]
     const [selectedCategories, setSelectedCategories] = useState<string[]>([])
     
     const toggleCategory = (category: string) => {
@@ -83,10 +90,10 @@ export default function HomeScreen(){
             </ThemedView>
             <View className="flex flex-col w-[90%] self-center gap-y-10 ">
                 <ThemedView className="self-center min-w-full">
-                    <Searchbar placeholder="Buscar..." value={searchQuery} onChangeText={setSearchQuery} style={{backgroundColor: currentColorScheme === 'dark' ? '#1e293b' : '#e2e8f0',color: colors.color}} />
+                    <Searchbar placeholder="Buscar..." value={searchQuery} onChangeText={setSearchQuery} style={{backgroundColor: theme.surface,color: theme.textSecondary, borderWidth: 1, borderColor: theme.border}} />
                 </ThemedView>
                 <View className="flex flex-row items-center justify-between">
-                    <ThemedText className="font-bold font-quicksand text-2xl pl-4">
+                    <ThemedText className="font-bold text-2xl pl-4">
                         Buscar por categoría
                     </ThemedText>
                     <Link href={'/(tabs)/recipes'} asChild>
@@ -99,8 +106,8 @@ export default function HomeScreen(){
                     data={CATEGORIES}
                     renderItem={
                         ({item}) => 
-                        <Chip key={item.name} style={{backgroundColor: '#F97316DD'}} selectedColor="#FFF" onPress={() => toggleCategory(item.name)} selected={selectedCategories.includes(item.name)}>
-                            <ThemedText className="text-base first-letter:font-medium" numberOfLines={1} ellipsizeMode="tail" style={{color: colors.color}}>
+                        <Chip key={item.name} style={{backgroundColor: currentColorScheme === "dark" ? theme.primaryDark : theme.primary}} selectedColor="#FFF" onPress={() => toggleCategory(item.name)} selected={selectedCategories.includes(item.name)}>
+                            <ThemedText className="text-base first-letter:font-medium" numberOfLines={1} ellipsizeMode="tail" style={{color: currentColorScheme === "dark" ? theme.text : theme.background}}>
                                 {item.name}
                             </ThemedText>
                         </Chip>

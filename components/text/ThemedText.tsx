@@ -3,20 +3,38 @@ import { Text, TextProps } from "react-native";
 
 interface ThemedTextProps extends TextProps {
   className?: string;
+  variant?: "primary" | "secondary"
 }
 
-export function ThemedText({ className = "", style, ...props }: ThemedTextProps) {
-  const { fontFamilies, colorScheme, currentColorScheme } = useTheme();
+export function ThemedText({ className = "", style, variant = "primary", ...props }: ThemedTextProps) {
+  const { colorScheme, currentColorScheme } = useTheme();
   const theme = colorScheme[currentColorScheme] || {};
 
-  const weightClass = className.match(/font-(thin|light|normal|medium|semibold|bold)/);
-  const weight = weightClass ? weightClass[1] : "normal";
+  //Verificamos si la clase contiene un peso de fuente
+  //y lo extraemos
+  const weightClass = className.match(/font-(medium|bold)/);
+  const weight = weightClass?.[1] ?? ""
 
-  const fontFamilyClass = className.match(/font-(quicksand|inter)/);
-  const fontFamily = fontFamilyClass ? fontFamilyClass[1] : "quicksand"; // Default es quicksand
+  //Si tenemos un peso de fuente, mapeamos a la clase que matchea con
+  //las fuentes especificadas en el tailwind config
+  const fontFamily = weight ? `font-rubik-${weight}` : "font-rubik"
 
-  const font = fontFamilies[fontFamily]?.[weight] || fontFamilies.quicksand.normal;
+  //limpiamos la clase font-medium o font-bold del className
+  //para evitar duplicados y evitar que se aplique el peso de fuente de tailwind
+  const cleanedClassName = className.replace(/\bfont-(medium|bold)\b/, "")
+
+  //Combinamos la clase de fuente con el resto de las clases
+  const classNames = `${fontFamily} ${cleanedClassName}`.replace(/\s+/g, ' ').trim()
   
+  const textColor = variant === "primary" ? theme.text : theme.textSecondary  
 
-  return <Text className={className} style={[{ fontFamily: font, color: theme?.color }, style]} {...props} />;
+  return (
+    <Text 
+    className={classNames} 
+    style={[{ color: textColor }, style]} 
+    {...props} 
+    />
+  )
 }
+
+

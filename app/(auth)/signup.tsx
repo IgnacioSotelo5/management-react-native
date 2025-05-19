@@ -34,20 +34,20 @@ export default function RegisterScreen(){
             options={{
                 headerShown: false,
                 statusBarStyle: "auto",
-                statusBarBackgroundColor: theme.backgroundColor,
+                statusBarBackgroundColor: theme.background,
             }}
             />
             <ThemedView withPadding className="flex-1 items-center ">
                 <View className="flex-1 w-4/5 items-center">
-                    <ThemedText className="w-full font-bold text-3xl mb-4">Bienvenido a SmartBake</ThemedText>
+                    <ThemedText className="authScreensText">Bienvenido a Hornito Express🔥</ThemedText>
                     <View className="self-start">
                         <ThemedText className="text-xl">Crea tu cuenta</ThemedText>
                         <View className="w-full mb-10 flex flex-row items-center">
                                 <ThemedText className="text-lg">¿Ya tienes cuenta?{' '}</ThemedText>
                                 <Link href={'/(auth)/login'} asChild>
                                     <Pressable>
-                                        <ThemedText style={{color: '#3b82f6'}} className="font-semibold text-base">
-                                            Inicia sesión
+                                        <ThemedText variant="secondary" className="font-medium underline">
+                                            Iniciar sesión
                                         </ThemedText>
                                     </Pressable>
                                 </Link>
@@ -57,46 +57,46 @@ export default function RegisterScreen(){
                     <View className="gap-8 w-full">
                         <TextInput 
                         placeholder="Nombre"
-                        className="inputText dark:text-white text-slate-700"
+                        className="inputText dark:text-dark-text text-light-textSecondary"
                         value={name}
                         onChangeText={setName}
                         />
                         <TextInput 
                         placeholder="Apellido"
-                        className="inputText dark:text-white text-slate-700"
+                        className="inputText dark:text-dark-text text-light-textSecondary"
                         value={lastName}
                         onChangeText={setLastName}
                         />
                         <TextInput 
                         placeholder="Email"
-                        className="inputText dark:text-white text-slate-700"
+                        className="inputText dark:text-dark-text text-light-textSecondary"
                         value={email}
                         onChangeText={setEmail}
                         />
                         <TextInput 
                         placeholder="Contraseña"
-                        className="inputText dark:text-white text-slate-700"
+                        className="inputText dark:text-dark-text text-light-textSecondary"
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry
                         />
                         {
                             errorMessage && errorMessage.length > 0 ? 
-                            <Text className="text-sm text-red-500">{errorMessage}</Text> :
+                            <Text className="text-sm dark:text-dark-error text-light-error">{errorMessage}</Text> :
                             null
                         }
                         <Pressable 
                         onPress={handleSignup}
-                        className="flex justify-center items-center rounded-full mt-4 py-3 px-6 dark:bg-slate-500">
-                            {
-                                isLoading ? 
-                                (
-                                    <ActivityIndicator size='large' color={theme.color} />
-                                ) : 
-                                (
-                                    <ThemedText className="text-xl font-semibold">Registrarse</ThemedText>
-                                )
-                            }
+                        className="flex justify-center items-center rounded-full mt-4 py-3 px-6 dark:bg-[#caaa6e]">
+                            <ThemedText style={{color: theme.surface}}  className="text-xl font-bold">
+                                {
+                                    isLoading ? (
+                                        <ActivityIndicator size={26} color={theme.surface} style={{width: 10}}  />
+                                    ) : (
+                                        'Crear cuenta'
+                                    )
+                                }
+                            </ThemedText>
                         </Pressable>
                     </View>
                 </View>
