@@ -3,7 +3,7 @@ import { ThemedView } from "@/components/view/ThemedView"
 import { useApiError } from "@/hooks/useApiError"
 import { useSession } from "@/hooks/useAuth"
 import { useTheme } from "@/hooks/useTheme"
-import { Stack, Link, router } from "expo-router"
+import { Stack, Link } from "expo-router"
 import { useState } from "react"
 import { ActivityIndicator, Text } from "react-native"
 import { View, Pressable, TextInput } from "react-native"
@@ -32,20 +32,20 @@ export default function LoginScreen(){
             options={{
                 headerShown: false,
                 statusBarStyle: "auto",
-                statusBarBackgroundColor: theme.backgroundColor,
+                statusBarBackgroundColor: theme.background,
             }}
             />
             <ThemedView withPadding className="flex-1 items-center ">
                 <View className="flex-1 w-4/5 items-center">
-                    <ThemedText className="font-bold text-3xl mb-4">Bienvenido a SmartBake</ThemedText>
+                    <ThemedText className="authScreensText">Bienvenido a Hornito Express 🔥</ThemedText>
                     <View className="self-start">
-                        <ThemedText className="font-regular text-xl">Inicia sesión con tu cuenta</ThemedText>
+                        <ThemedText className="text-lg">Inicia sesión con tu cuenta</ThemedText>
                         <View className="mb-10 flex flex-row items-center">
-                            <ThemedText className="text-lg"> ¿Aún no tienes una cuenta?{' '}</ThemedText> 
+                            <ThemedText className="text-lg dark:text-dark-text"> ¿Aún no tienes una cuenta?{' '}</ThemedText> 
                             <Link href={'/(auth)/signup'} asChild>
                                 <Pressable>
-                                    <ThemedText style={{color: '#3b82f6'}} className="font-semibold text-base">
-                                        Registrate
+                                    <ThemedText variant="secondary" className="font-rubik-medium underline">
+                                        Crear cuenta
                                     </ThemedText>
                                 </Pressable>
                             </Link>
@@ -54,29 +54,33 @@ export default function LoginScreen(){
                     <View className="mb-8 gap-8 w-full">
                         <TextInput 
                         placeholder="Email"
-                        className="inputText dark:text-white text-slate-700"
+                        className="inputText dark:text-dark-text text-light-text"
                         value={email}
                         onChangeText={setEmail}
+                        autoComplete="email"
+                        textContentType="emailAddress"
                         />
                         <TextInput 
                         placeholder="Contraseña"
-                        className="inputText dark:text-white text-slate-700"
+                        className="inputText dark:text-dark-text text-light-text"
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry
+                        autoComplete="password"
+                        textContentType="password"
                         />
-                        <Text className="text-red-500 text-sm">
+                        <Text className="dark:text-dark-error text-light-error text-sm">
                             {
                                 error && error.length > 0 ? error : null
                             }
                         </Text>
                         <Pressable 
                         onPress={onLogin}
-                        className="flex justify-center items-center rounded-full py-3 px-6 dark:bg-slate-500">
-                            <ThemedText className="text-xl font-semibold">
+                        className="flex justify-center items-center rounded-full py-3 px-6 dark:bg-dark-primaryLight bg-light-primaryLight">
+                        <ThemedText style={{color: theme.surface}} className="text-xl font-bold">
                                 {
                                     isLoading ? (
-                                        <ActivityIndicator size={26} color={"#f01"} style={{width: 10}}  />
+                                        <ActivityIndicator size={26} color={theme.surface} style={{width: 10}}  />
                                     ) : (
                                         'Iniciar sesión'
                                     )

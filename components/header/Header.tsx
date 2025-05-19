@@ -7,10 +7,11 @@ import { useSession } from "@/hooks/useAuth";
 export function Header(){
     const [menuVisible, setMenuVisible] = useState(false)
     const {signOut} = useSession()
+
     return(
-        <View className="absolute top-0 right-0 left-0 mb-[20px] flex-row justify-between items-center px-6 py-4 bg-slate-300 dark:bg-slate-800 backdrop-blur-sm rounded-b-xl">
-            <ThemedText className="font-semibold text-xl">
-                SmartBake
+        <View className="absolute top-0 right-0 left-0 mb-[20px] flex-row justify-between items-center px-6 py-4 bg-light-surface dark:bg-dark-surface dark:border-0 border border-light-border border-t-0 backdrop-blur-sm rounded-b-xl">
+            <ThemedText className="font-bold text-2xl">
+                Hornito 🔥
             </ThemedText>
             <Menu
             anchorPosition="bottom"

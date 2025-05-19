@@ -4,5 +4,9 @@
 
 
 .inputText{
-    @apply rounded-full w-full px-6 py-2 h-14 dark:bg-slate-700 dark:placeholder:text-white placeholder:text-slate-800
+    @apply rounded-full w-full px-6 py-2 h-14 dark:bg-dark-surface bg-light-surface border border-light-border dark:border-0 dark:placeholder:text-dark-textSecondary placeholder:text-light-textSecondary
+}
+
+.authScreensText{
+    @apply w-full font-bold text-[1.45rem] leading-8 mb-4
 }

@@ -5,12 +5,21 @@ interface ThemeProviderProps{
 }
 
 interface ColorScheme {
-    backgroundColor: string
-    color: string
+    background: string
+    surface: string
+    primary: string
+    primaryDark: string
+    primaryLight: string
+    text: string
+    textSecondary: string
+    border: string
+    success: string
+    error: string
+
 }
 
 interface ThemeContextProps {
-    fontFamilies: Record<string, Record<string, string>>
+    fontFamily: Record<string, Record<string, string>>
     colorScheme: {
         dark: ColorScheme
         light: ColorScheme
@@ -19,31 +28,38 @@ interface ThemeContextProps {
 }
 
 const themeConfig: ThemeContextProps ={
-    fontFamilies: {
-        quicksand: {
-            light: "Quicksand-Light",
-            normal: "Quicksand-Regular",
-            medium: "Quicksand-Medium",
-            semibold: "Quicksand-SemiBold",
-            bold: "Quicksand-Bold",
-        },
-        inter: {
-            light: "Inter-Light",
-            normal: "Inter-Regular",
-            medium: "Inter-Medium",
-            semibold: "Inter-SemiBold",
-            bold: "Inter-Bold",
+    fontFamily: {
+        rubik: {
+            normal: "Rubik_400Regular",
+            medium: "Rubik_500Medium",
+            bold: "Rubik_700Bold",
         }
     },
     colorScheme:  {
-        dark: {
-            backgroundColor: '#020617',
-            color: '#fff',
-        },
         light: {
-            backgroundColor: '#f5f5f5',
-            color: '#000'
-        }
+          background: '#FFFDF7',
+          surface: '#FFF6E5',
+          primary: '#D9822B',
+          primaryDark: '#B1611C',
+          primaryLight: "#F9C89A",
+          text: '#3D2C1E',
+          textSecondary: '#7A6A58',
+          border: '#E0D4C2',
+          success: '#5BBE72',
+          error: '#D9534F',
+        },
+        dark: {
+          background: '#1E1A16',
+          surface: '#2B241F',
+          primary: '#F3A03C',
+          primaryDark: '#D9822B',
+          primaryLight: "#CAAA6E",
+          text: '#F5F0EA',
+          textSecondary: '#C3B7A8',
+          border: '#3B332D',
+          success: '#70D88B',
+          error: '#FF6B6B',
+        },
     } 
 }
 export const ThemeContext = createContext<ThemeContextProps>(themeConfig)
