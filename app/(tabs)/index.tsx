@@ -92,13 +92,11 @@ export default function HomeScreen(){
                     <Searchbar placeholder="Buscar..." value={searchQuery} onChangeText={setSearchQuery} style={{backgroundColor: theme.surface,color: theme.textSecondary, borderWidth: 1, borderColor: theme.border}} />
                 </ThemedView>
                 <View className="flex flex-row items-center justify-between">
-                    <ThemedText className="font-bold text-2xl pl-4">
+                    <ThemedText className="font-medium text-2xl pl-4">
                         Buscar por categoría
                     </ThemedText>
                     <Link href={'/(tabs)/recipes'} asChild>
-                        <Pressable className="pr-4">
-                            <ThemedText className="opacity-80"> Ver todo</ThemedText>
-                        </Pressable>
+                        <ThemedText style={{textDecorationLine: "underline"}} className="opacity-80"> Ver todo</ThemedText>
                     </Link>
                 </View>
                     <FlatList 

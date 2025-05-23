@@ -6,7 +6,7 @@ interface ThemedTextProps extends TextProps {
   variant?: "primary" | "secondary"
 }
 
-export function ThemedText({ className = "", style, variant = "primary", ...props }: ThemedTextProps) {
+export function ThemedText({children, className = "", style, variant = "primary", ...props }: ThemedTextProps) {
   const { colorScheme, currentColorScheme } = useTheme();
   const theme = colorScheme[currentColorScheme] || {};
 
@@ -33,7 +33,9 @@ export function ThemedText({ className = "", style, variant = "primary", ...prop
     className={classNames} 
     style={[{ color: textColor }, style]} 
     {...props} 
-    />
+    >
+      {children}
+    </Text>
   )
 }
 
