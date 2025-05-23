@@ -27,6 +27,9 @@ module.exports = {
           border: '#E0D4C2',
           success: '#5BBE72',
           error: '#D9534F',
+          highlight: '#FFDEC999',
+          highlightSoft: '#FFF2CC99',
+          highlightWarm: '#FDEED999',
         },
         dark: {
           background: '#1E1A16',
@@ -36,10 +39,12 @@ module.exports = {
           primaryLight: "#CAAA6E",
           text: '#F5F0EA',
           textSecondary: '#C3B7A8',
-          
           border: '#3B332D',
           success: '#70D88B',
           error: '#FF6B6B',
+          highlight: '#EA580C',
+          highlightDark: '#D97706',
+          highlightSoft: '#FB923C',
         },
       }
     }

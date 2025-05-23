@@ -4,18 +4,17 @@ import { ThemedText } from "@/components/text/ThemedText";
 import { ThemedView } from "@/components/view/ThemedView";
 import { useTheme } from "@/hooks/useTheme";
 import { recipes } from "@/mocks/recipes";
-import { Link, Redirect, router } from "expo-router";
-import { useEffect, useState } from "react";
+import { Link } from "expo-router";
+import { useState } from "react";
 import { FlatList, Pressable, StyleSheet, View } from "react-native";
 import { Chip, Divider, Searchbar } from "react-native-paper";
-import { useSession } from "@/hooks/useAuth";
 
 const CARDS: LinkedCardProps[] = [
   {
     title: 'Inventario',
     content: 'Administra tu inventario y mantén tu materia prima actualizada',
     bgColor: {
-      dark: '#ea580c',
+      dark: '#EA580C',
       light: '#FFDEC999'
     },
     href: '/(tabs)/inventary'
@@ -24,7 +23,7 @@ const CARDS: LinkedCardProps[] = [
     title: 'Recetas',
     content: 'Actualiza tus recetas automáticamente para mantener tus precios al día',
     bgColor: {
-      dark: '#d97706',
+      dark: '#D97706',
       light: '#FFF2CC99'
     },
     href: '/(tabs)/recipes'
@@ -33,7 +32,7 @@ const CARDS: LinkedCardProps[] = [
     title: 'Pedidos',
     content: 'Registra tus pedidos, haz seguimiento y recibe notificaciones sobre su estado',
     bgColor: {
-      dark: '#fb923c',
+      dark: '#FB923C',
       light: '#FDEED999'
     },
     href: '/(tabs)/orders'
