@@ -1,7 +1,7 @@
-export class ApiError extends Error{
+export class ApiError<T = any> extends Error{
     status: number
-    data: any | undefined
-    constructor (message: string, status: number, data?: any){
+    data?: T
+    constructor (message: string, status: number, data?: T){
         super(message)
         this.status = status
         this.data = data

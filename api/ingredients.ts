@@ -1,22 +1,21 @@
-import { BASE_URL } from "@/constants/config";
+import { api } from "@/lib/axios";
 import { Ingredient } from "@/types/ingredients";
-import axios from "axios";
 
 export class IngredientsAPI {
     static async getIngredients() {
-        const {data} = await axios.get(`${BASE_URL}/ingredient`)
-        
-        return data
+        const response = await api.get<Ingredient[]>('/ingredient')        
+
+        return response.data
     }
 
     static async getIngredient({id}: {id: string}){
-        const {data} = await axios.get(`${BASE_URL}/ingredient/${id}`)
+        const {data} = await api.get(`/ingredient/${id}`)
         
         return data
     }
 
     static async createIngredient(ingredient: Ingredient){
-        const {data} = await axios.post(`${BASE_URL}/ingredient`, {
+        const {data} = await api.post(`/ingredient`, {
             data: ingredient
         })
 
@@ -24,7 +23,7 @@ export class IngredientsAPI {
     }
 
     static async updateIngredient(ingredient: Ingredient){
-        const {data} = await axios.put(`${BASE_URL}/ingredient/${ingredient.id}`, {
+        const {data} = await api.put(`/ingredient/${ingredient.id}`, {
             data: ingredient
         })
         
