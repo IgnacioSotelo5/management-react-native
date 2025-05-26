@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/text/ThemedText"
 import { ThemedView } from "@/components/view/ThemedView"
 import { AUTH_ERRORS } from "@/constants/auth.constants"
-import { useApiError } from "@/hooks/useApiError"
+import { ErrorScope, useApiError } from "@/hooks/useApiError"
 import { useSession } from "@/hooks/useAuth"
 import { useTheme } from "@/hooks/useTheme"
 import { Stack, Link } from "expo-router"
@@ -23,7 +23,7 @@ export default function RegisterScreen(){
         try {
            await signUp({name, lastName, email, password});
         } catch (error: any) {
-            const message = handleError(error, AUTH_ERRORS.SIGNUP_ERROR, "auth")
+            const message = handleError(error, AUTH_ERRORS.SIGNUP_ERROR, ErrorScope.AUTH)
             setErrorMessage(message)
         } 
     }

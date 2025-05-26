@@ -9,13 +9,13 @@ import { useEffect, useState } from "react";
 export default function InventaryScreen(){
     const [ingredients, setIngredients] = useState<Ingredient[]>([])    
 
-    useEffect(() => {        
-        const fetchIngredients = async () => {
-            const response = await IngredientsAPI.getIngredients()
-            
-            setIngredients(response.data)
+    useEffect(() => {                
+        const fetchIngredients = async () => {            
+            const ingredients = await IngredientsAPI.getIngredients()
+
+            setIngredients(ingredients)
         }
-    
+        
         fetchIngredients()
     }, []);    
     
