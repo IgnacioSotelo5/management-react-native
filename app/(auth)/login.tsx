@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/text/ThemedText"
 import { ThemedView } from "@/components/view/ThemedView"
-import { useApiError } from "@/hooks/useApiError"
+import { ErrorScope, useApiError } from "@/hooks/useApiError"
 import { useSession } from "@/hooks/useAuth"
 import { useTheme } from "@/hooks/useTheme"
 import { Stack, Link } from "expo-router"
@@ -21,9 +21,8 @@ export default function LoginScreen(){
         try {
             await signIn({email, password})
         } catch (error: any) {
-            const message = handleError(error, "Error al iniciar sesión", "auth")         
+            const message = handleError(error, "Error al iniciar sesión", ErrorScope.AUTH)         
             setError(message)
-            throw new Error('Error al iniciar sesión. ' + error.message)
         }
     }
     return(
