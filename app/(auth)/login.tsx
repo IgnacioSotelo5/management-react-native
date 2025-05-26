@@ -1,5 +1,6 @@
 import { ThemedText } from "@/components/text/ThemedText"
 import { ThemedView } from "@/components/view/ThemedView"
+import { AUTH_ERRORS } from "@/constants/auth.constants"
 import { ErrorScope, useApiError } from "@/hooks/useApiError"
 import { useSession } from "@/hooks/useAuth"
 import { useTheme } from "@/hooks/useTheme"
@@ -21,7 +22,7 @@ export default function LoginScreen(){
         try {
             await signIn({email, password})
         } catch (error: any) {
-            const message = handleError(error, "Error al iniciar sesión", ErrorScope.AUTH)         
+            const message = handleError(error, AUTH_ERRORS.LOGIN_ERROR, ErrorScope.AUTH)         
             setError(message)
         }
     }
