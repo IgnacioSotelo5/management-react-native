@@ -1,50 +1,65 @@
-# Welcome to your Expo app 👋
+# Management React Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform mobile app for bakery management, built with React Native and Expo. This app is the mobile frontend for the Management Express backend, providing features for inventory, orders, and customer management.
 
-## Get started
+## Features
+- User authentication
+- Product and inventory management
+- Order and sales tracking
+- Customer management
+- Modern UI with React Native Paper and Tailwind CSS
+- State management with Zustand
+- Form validation with Formik and Yup
 
-1. Install dependencies
+## Tech Stack
+- React Native (Expo)
+- TypeScript
+- Zustand
+- React Native Paper
+- Tailwind CSS (NativeWind)
+- Expo Router
+- Axios
 
-   ```bash
-   npm install
-   ```
+## Getting Started
 
-2. Start the app
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn
+- Expo CLI (`npm install -g expo-cli`)
 
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+### Installation
 ```bash
-npm run reset-project
+git clone https://github.com/IgnacioSotelo5/management-react-native.git
+cd management-react-native
+npm install
+# or
+yarn install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Running the App
+```bash
+npm start
+# or
+yarn start
+```
 
-## Learn more
+Follow the Expo CLI instructions to run on Android, iOS, or web.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Project Structure
+```
+management-react-native/
+  app/           # App entry and routes
+  components/    # Reusable UI components
+  screens/       # App screens
+  store/         # Zustand state management
+  utils/         # Utility functions
+  ...
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Roadmap
+- [ ] Add push notifications
+- [ ] Add offline support
+- [ ] Improve analytics and reporting
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## License
+MIT
